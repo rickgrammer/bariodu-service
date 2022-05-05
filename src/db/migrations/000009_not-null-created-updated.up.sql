@@ -1,0 +1,11 @@
+SET search_path TO papita;
+
+ALTER TABLE author
+ALTER COLUMN created SET NOT NULL,
+ALTER COLUMN email SET NOT NULL;
+
+ALTER TABLE profile
+ALTER COLUMN created SET NOT NULL;
+
+ALTER TABLE post
+ALTER COLUMN created SET NOT NULL;
