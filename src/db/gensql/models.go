@@ -13,50 +13,50 @@ import (
 )
 
 type Author struct {
-	Id        uuid.UUID    `db:"id" json:"id"`
-	Email     string       `db:"email" json:"email"`
-	Password  string       `db:"password" json:"password"`
-	Created   time.Time    `db:"created" json:"created"`
-	Updated   time.Time    `db:"updated" json:"updated"`
-	LastLogin sql.NullTime `db:"last_login" json:"last_login"`
-	FirstName string       `db:"first_name" json:"first_name"`
-	LastName  string       `db:"last_name" json:"last_name"`
-	IsDeleted sql.NullBool `db:"is_deleted" json:"is_deleted"`
+	Id        uuid.UUID    `json:"id"`
+	Email     string       `json:"email"`
+	Password  string       `json:"password"`
+	Created   time.Time    `json:"created"`
+	Updated   time.Time    `json:"updated"`
+	LastLogin sql.NullTime `json:"lastLogin"`
+	FirstName string       `json:"firstName"`
+	LastName  string       `json:"lastName"`
+	IsDeleted sql.NullBool `json:"isDeleted"`
 }
 
 type AuthorSession struct {
-	Id       string       `db:"id" json:"id"`
-	AuthorID uuid.UUID    `db:"author_id" json:"author_id"`
-	Created  sql.NullTime `db:"created" json:"created"`
+	Id       string       `json:"id"`
+	AuthorID uuid.UUID    `json:"authorID"`
+	Created  sql.NullTime `json:"created"`
 }
 
 type Post struct {
-	Id        uuid.UUID    `db:"id" json:"id"`
-	AuthorID  uuid.UUID    `db:"author_id" json:"author_id"`
-	Content   pgtype.JSONB `db:"content" json:"content"`
-	Created   time.Time    `db:"created" json:"created"`
-	Updated   time.Time    `db:"updated" json:"updated"`
-	IsDeleted sql.NullBool `db:"is_deleted" json:"is_deleted"`
+	Id        uuid.UUID    `json:"id"`
+	AuthorID  uuid.UUID    `json:"authorID"`
+	Content   pgtype.JSONB `json:"content"`
+	Created   time.Time    `json:"created"`
+	Updated   time.Time    `json:"updated"`
+	IsDeleted sql.NullBool `json:"isDeleted"`
 }
 
 type PostTag struct {
-	PostID uuid.UUID `db:"post_id" json:"post_id"`
-	TagID  uuid.UUID `db:"tag_id" json:"tag_id"`
+	PostID uuid.UUID `json:"postID"`
+	TagID  uuid.UUID `json:"tagID"`
 }
 
 type Profile struct {
-	Id        uuid.UUID      `db:"id" json:"id"`
-	AuthorID  uuid.UUID      `db:"author_id" json:"author_id"`
-	Image     sql.NullString `db:"image" json:"image"`
-	About     pgtype.JSONB   `db:"about" json:"about"`
-	Created   time.Time      `db:"created" json:"created"`
-	Updated   time.Time      `db:"updated" json:"updated"`
-	IsDeleted sql.NullBool   `db:"is_deleted" json:"is_deleted"`
+	Id        uuid.UUID      `json:"id"`
+	AuthorID  uuid.UUID      `json:"authorID"`
+	Image     sql.NullString `json:"image"`
+	About     pgtype.JSONB   `json:"about"`
+	Created   time.Time      `json:"created"`
+	Updated   time.Time      `json:"updated"`
+	IsDeleted sql.NullBool   `json:"isDeleted"`
 }
 
 type Tag struct {
-	Id      uuid.UUID    `db:"id" json:"id"`
-	Name    string       `db:"name" json:"name"`
-	Created sql.NullTime `db:"created" json:"created"`
-	Updated time.Time    `db:"updated" json:"updated"`
+	Id      uuid.UUID    `json:"id"`
+	Name    string       `json:"name"`
+	Created sql.NullTime `json:"created"`
+	Updated time.Time    `json:"updated"`
 }

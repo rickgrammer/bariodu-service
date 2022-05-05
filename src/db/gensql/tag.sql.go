@@ -22,8 +22,8 @@ RETURNING id, name, created, updated
 `
 
 type CreateTagParams struct {
-	Name    string    `db:"name" json:"name"`
-	Updated time.Time `db:"updated" json:"updated"`
+	Name    string    `json:"name"`
+	Updated time.Time `json:"updated"`
 }
 
 func (q *Queries) CreateTag(ctx context.Context, arg CreateTagParams) (Tag, error) {
@@ -48,8 +48,8 @@ RETURNING post_id, tag_id
 `
 
 type CreateTagForPostParams struct {
-	PostID uuid.UUID `db:"post_id" json:"post_id"`
-	TagID  uuid.UUID `db:"tag_id" json:"tag_id"`
+	PostID uuid.UUID `json:"postID"`
+	TagID  uuid.UUID `json:"tagID"`
 }
 
 func (q *Queries) CreateTagForPost(ctx context.Context, arg CreateTagForPostParams) (PostTag, error) {
@@ -93,8 +93,8 @@ OFFSET $1 LIMIT $2
 `
 
 type ListTagsParams struct {
-	Offset int32 `db:"offset" json:"offset"`
-	Limit  int32 `db:"limit" json:"limit"`
+	Offset int32 `json:"offset"`
+	Limit  int32 `json:"limit"`
 }
 
 func (q *Queries) ListTags(ctx context.Context, arg ListTagsParams) ([]Tag, error) {
@@ -130,8 +130,8 @@ where _post_tag.post_id = $1
 `
 
 type ListTagsForPostRow struct {
-	Id   uuid.UUID `db:"id" json:"id"`
-	Name string    `db:"name" json:"name"`
+	Id   uuid.UUID `json:"id"`
+	Name string    `json:"name"`
 }
 
 func (q *Queries) ListTagsForPost(ctx context.Context, postID uuid.UUID) ([]ListTagsForPostRow, error) {

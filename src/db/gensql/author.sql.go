@@ -23,23 +23,23 @@ RETURNING id, email, password, first_name, last_name, last_login, created, updat
 `
 
 type CreateAuthorParams struct {
-	Email     string       `db:"email" json:"email"`
-	Password  string       `db:"password" json:"password"`
-	FirstName string       `db:"first_name" json:"first_name"`
-	LastName  string       `db:"last_name" json:"last_name"`
-	LastLogin sql.NullTime `db:"last_login" json:"last_login"`
-	Updated   time.Time    `db:"updated" json:"updated"`
+	Email     string       `json:"email"`
+	Password  string       `json:"password"`
+	FirstName string       `json:"firstName"`
+	LastName  string       `json:"lastName"`
+	LastLogin sql.NullTime `json:"lastLogin"`
+	Updated   time.Time    `json:"updated"`
 }
 
 type CreateAuthorRow struct {
-	Id        uuid.UUID    `db:"id" json:"id"`
-	Email     string       `db:"email" json:"email"`
-	Password  string       `db:"password" json:"password"`
-	FirstName string       `db:"first_name" json:"first_name"`
-	LastName  string       `db:"last_name" json:"last_name"`
-	LastLogin sql.NullTime `db:"last_login" json:"last_login"`
-	Created   time.Time    `db:"created" json:"created"`
-	Updated   time.Time    `db:"updated" json:"updated"`
+	Id        uuid.UUID    `json:"id"`
+	Email     string       `json:"email"`
+	Password  string       `json:"password"`
+	FirstName string       `json:"firstName"`
+	LastName  string       `json:"lastName"`
+	LastLogin sql.NullTime `json:"lastLogin"`
+	Created   time.Time    `json:"created"`
+	Updated   time.Time    `json:"updated"`
 }
 
 func (q *Queries) CreateAuthor(ctx context.Context, arg CreateAuthorParams) (CreateAuthorRow, error) {
@@ -145,10 +145,10 @@ RETURNING id, email, password, created, updated, last_login, first_name, last_na
 `
 
 type UpdateAuthorParams struct {
-	Id        uuid.UUID `db:"id" json:"id"`
-	Email     string    `db:"email" json:"email"`
-	Password  string    `db:"password" json:"password"`
-	FirstName string    `db:"first_name" json:"first_name"`
+	Id        uuid.UUID `json:"id"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	FirstName string    `json:"firstName"`
 }
 
 func (q *Queries) UpdateAuthor(ctx context.Context, arg UpdateAuthorParams) (Author, error) {

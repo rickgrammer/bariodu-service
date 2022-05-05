@@ -13,35 +13,6 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-type MinimalCRUDer interface {
-    Get(w http.ResponseWriter,r *http.Request)
-    Post(w http.ResponseWriter,r *http.Request)
-    Delete(w http.ResponseWriter,r *http.Request)
-}
-
-type CRUDer interface {
-    Get(w http.ResponseWriter,r *http.Request)
-    GetAll(w http.ResponseWriter,r *http.Request)
-    Post(w http.ResponseWriter,r *http.Request)
-    Put(w http.ResponseWriter,r *http.Request)
-    Patch(w http.ResponseWriter,r *http.Request)
-    Delete(w http.ResponseWriter,r *http.Request)
-}
-
-
-type urlType struct {
-    url string;
-    method string;
-    handler func(w http.ResponseWriter,r *http.Request);
-}
-
-var urls = []urlType{
-    {"/",      "GET", bazi},
-    {"/posts", "GET", posts},
-    {"/posts/{id}", "GET", getPost},
-    {"/bro",   "GET", hard},
-}
-
 func getPost(w http.ResponseWriter, r *http.Request) {
     ctx := context.Background()
     conn, _ := pgx.Connect(ctx, "postgresql://postgres:postgres@localhost:5500/bariodu?search_path=papita")
@@ -93,8 +64,6 @@ func hard(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 }
 
-func BindRoutes(muxRouter *mux.Router) {
-    for _, url := range urls {
-        muxRouter.HandleFunc(url.url, url.handler).Methods(url.method)
-    }
+func easy(w http.ResponseWriter, r *http.Request) {
+    AuthorHustler.Get(w, r)
 }

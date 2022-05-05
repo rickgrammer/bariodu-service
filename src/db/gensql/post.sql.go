@@ -23,16 +23,16 @@ RETURNING id, author_id, content, updated
 `
 
 type CreatePostParams struct {
-	AuthorID uuid.UUID    `db:"author_id" json:"author_id"`
-	Content  pgtype.JSONB `db:"content" json:"content"`
-	Updated  time.Time    `db:"updated" json:"updated"`
+	AuthorID uuid.UUID    `json:"authorID"`
+	Content  pgtype.JSONB `json:"content"`
+	Updated  time.Time    `json:"updated"`
 }
 
 type CreatePostRow struct {
-	Id       uuid.UUID    `db:"id" json:"id"`
-	AuthorID uuid.UUID    `db:"author_id" json:"author_id"`
-	Content  pgtype.JSONB `db:"content" json:"content"`
-	Updated  time.Time    `db:"updated" json:"updated"`
+	Id       uuid.UUID    `json:"id"`
+	AuthorID uuid.UUID    `json:"authorID"`
+	Content  pgtype.JSONB `json:"content"`
+	Updated  time.Time    `json:"updated"`
 }
 
 func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (CreatePostRow, error) {
@@ -54,8 +54,8 @@ WHERE author_id = $1 and id = $2
 `
 
 type DeletePostParams struct {
-	AuthorID uuid.UUID `db:"author_id" json:"author_id"`
-	Id       uuid.UUID `db:"id" json:"id"`
+	AuthorID uuid.UUID `json:"authorID"`
+	Id       uuid.UUID `json:"id"`
 }
 
 func (q *Queries) DeletePost(ctx context.Context, arg DeletePostParams) error {
@@ -69,8 +69,8 @@ WHERE author_id = $1 and id = $2 and is_deleted = false LIMIT 1
 `
 
 type GetPostParams struct {
-	AuthorID uuid.UUID `db:"author_id" json:"author_id"`
-	Id       uuid.UUID `db:"id" json:"id"`
+	AuthorID uuid.UUID `json:"authorID"`
+	Id       uuid.UUID `json:"id"`
 }
 
 func (q *Queries) GetPost(ctx context.Context, arg GetPostParams) (Post, error) {
@@ -95,9 +95,9 @@ OFFSET $2 LIMIT $3
 `
 
 type ListPostsParams struct {
-	AuthorID uuid.UUID `db:"author_id" json:"author_id"`
-	Offset   int32     `db:"offset" json:"offset"`
-	Limit    int32     `db:"limit" json:"limit"`
+	AuthorID uuid.UUID `json:"authorID"`
+	Offset   int32     `json:"offset"`
+	Limit    int32     `json:"limit"`
 }
 
 func (q *Queries) ListPosts(ctx context.Context, arg ListPostsParams) ([]Post, error) {
